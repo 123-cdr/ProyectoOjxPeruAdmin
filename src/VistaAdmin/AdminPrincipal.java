@@ -17,11 +17,12 @@ public class AdminPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form AdminPrincipal
      */
+    int tipoUser;
+    
     public AdminPrincipal() {
         initComponents();
     }
     
-    String tipoUser = "";
     boolean ingreso= false;
     
     void IngresarSistema(){
@@ -31,10 +32,10 @@ public class AdminPrincipal extends javax.swing.JFrame {
             ResultSet rs = pst.executeQuery();
             
             if(rs.next()){
-                tipoUser = rs.getString("tipoUsuario");
+                tipoUser = rs.getInt("tipoUsuario");
                 ingreso = true;               
             }
-            System.out.println(ingreso+"-->"+tipoUser);
+            System.out.println(ingreso+"--> "+tipoUser);
         } catch (Exception e) {
             System.out.println("Error en ingresar admin: " + e);           
         }
@@ -178,6 +179,12 @@ public class AdminPrincipal extends javax.swing.JFrame {
         if(ingreso==true){
             PantallaPrincipal PP = new PantallaPrincipal();
             PP.setVisible(true);
+            
+            if(tipoUser==2){
+                PantallaPrincipal.btnPeliculas.setVisible(false);
+                PantallaPrincipal.btnReportes.setVisible(false);
+            }
+            
             this.dispose();          
         }
         else{

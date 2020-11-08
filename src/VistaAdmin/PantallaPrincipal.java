@@ -83,6 +83,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         btnReportes.setBackground(new java.awt.Color(153, 255, 255));
         btnReportes.setFont(new java.awt.Font("Yu Gothic Light", 1, 24)); // NOI18N
         btnReportes.setText("Reportes");
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -260,6 +265,11 @@ public class PantallaPrincipal extends javax.swing.JFrame {
         PanelModulo.revalidate();
         PanelModulo.repaint();
     }//GEN-LAST:event_btnPeliculasActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnReportesActionPerformed
 
     /**
      * @param args the command line arguments

@@ -75,7 +75,7 @@ public class NuevaPelicula extends javax.swing.JFrame {
         txtNombrePe.setText("");
         txtCantidadPe.setText("");
         txtCostoPe.setText("");
-        cboCategoria.setSelectedIndex(-1);
+        cboCategoria.setSelectedIndex(0);
     }
     
     void cargarPelicula(){      
@@ -87,9 +87,29 @@ public class NuevaPelicula extends javax.swing.JFrame {
         }
         else{
             System.out.println("Es nueva pelicula");
-            cboCategoria.setSelectedIndex(-1);
+            cboCategoria.setSelectedIndex(0);
         }
     }
+    
+//    void ingresar(){
+//        String sql="INSERT INTO Pelicula (nombre,apellidoP,apellidoM,dni,sexo,estadoCliente) VALUES (?,?,?,?,?,?)";
+//        try {
+//            PreparedStatement pst  = cn.prepareStatement(sql);
+//            pst.setString(1, txtNombres.getText());
+//            pst.setString(2, txtApellidoP.getText());
+//            pst.setString(3, txtApellidoM.getText());
+//            pst.setString(4, txtDni.getText());
+//            pst.setString(5, cboSexo.getSelectedItem().toString());
+//            pst.setInt(6, 1);   
+//
+//            int n=pst.executeUpdate();
+//            if(n>0){
+//                JOptionPane.showMessageDialog(null, "Registro Guardado con Exito");
+//            }
+//        } catch (SQLException ex) {
+//            System.out.println("Error al ingresar datos del Cliente: " + ex);
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -117,6 +137,7 @@ public class NuevaPelicula extends javax.swing.JFrame {
         photo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -136,6 +157,11 @@ public class NuevaPelicula extends javax.swing.JFrame {
         jLabel5.setText("Imagen:");
 
         btnGuardar.setText("GUARDAR");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnRegresar.setText("REGRESAR");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -166,23 +192,23 @@ public class NuevaPelicula extends javax.swing.JFrame {
                         .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addGap(22, 22, 22)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtNombrePe, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCostoPe, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtCantidadPe, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cboCategoria, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(photo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cboIngresarImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)))
-                        .addGap(0, 20, Short.MAX_VALUE)))
+                                .addComponent(cboIngresarImagen, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
+                            .addComponent(cboCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 16, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -210,21 +236,20 @@ public class NuevaPelicula extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtCantidadPe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(cboCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(photo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(101, 101, 101)
-                        .addComponent(jLabel5))
+                        .addGap(84, 84, 84)
+                        .addComponent(cboIngresarImagen))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(photo, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(cboIngresarImagen)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegresar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
@@ -248,6 +273,8 @@ public class NuevaPelicula extends javax.swing.JFrame {
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
+        LimpiarCampos();
+        PanelPelicula.mostrarPelicula = false;
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
@@ -263,6 +290,19 @@ public class NuevaPelicula extends javax.swing.JFrame {
         img=img.getScaledInstance(268,218,1);
         photo.setIcon(new ImageIcon(img));
     }//GEN-LAST:event_cboIngresarImagenActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+        if(PanelPelicula.mostrarPelicula==true){
+            //modificar();
+        }
+        else{
+            //ingresar();
+        } 
+        LimpiarCampos();
+        PanelPelicula.mostrarPelicula = false;
+        this.dispose();
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments

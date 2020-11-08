@@ -34,7 +34,7 @@ public class PanelPelicula extends javax.swing.JPanel {
     
     void cargar(){     
         String mostrar="SELECT * FROM Pelicula WHERE estadoP="+1;
-        String []titulos={"id","Imagen","Película","Costo","Cantidad"};
+        String []titulos={"id","Imagen","Película","Costo","Stock"};
         Object []Registros=new Object[5];
         
         model= new DefaultTableModel(null, titulos);

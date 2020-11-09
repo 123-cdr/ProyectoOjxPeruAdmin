@@ -4,6 +4,7 @@ package VistaAdmin;
 import Conexion.ConexionSQL;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -56,7 +57,7 @@ public class PanelPelicula extends javax.swing.JPanel {
               try {
                   img = ImageIO.read(new ByteArrayInputStream(data));
               } catch (Exception e) {
-                  System.out.println("error imageio pelicula " + e);
+                  System.out.println("error imagen pelicula " + e);
               }
 
                 Registros[1]= new JLabel(new ImageIcon(img));
@@ -71,6 +72,22 @@ public class PanelPelicula extends javax.swing.JPanel {
         } catch (SQLException ex) {
             System.out.println("Error en la tabla pelicula: " + ex);
         }
+    }
+    
+    void EliminarPelicula(){
+        try {
+                String insertar = "UPDATE Pelicula SET "
+                +"estadoP=2"
+                +"WHERE idPelicula='"+idPeli+"'";
+                
+                PreparedStatement pst = cn.prepareStatement(insertar);
+                pst.executeUpdate();
+                
+                System.out.println("Se elimino correctamente la pelicula");
+        } 
+        catch (Exception e) {
+                System.out.println("error al Eliminar los datos de la pelicula: "+e);
+        } 
     }
 
     /**
@@ -125,6 +142,11 @@ public class PanelPelicula extends javax.swing.JPanel {
 
         LabelEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/eliminar.png"))); // NOI18N
         LabelEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LabelEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LabelEliminarMouseClicked(evt);
+            }
+        });
 
         LabelEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/editar.png"))); // NOI18N
         LabelEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -302,6 +324,24 @@ public class PanelPelicula extends javax.swing.JPanel {
         }
         mostrarPelicula = true;
     }//GEN-LAST:event_tablaMostrarPeliculaMouseClicked
+
+    private void LabelEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LabelEliminarMouseClicked
+        // TODO add your handling code here:
+        if(mostrarPelicula==true){
+            int reply = JOptionPane.showConfirmDialog(null, "DESEAS ELIMINAR LA PELÍCULA ?", "Eliminar", JOptionPane.YES_NO_OPTION); 
+            if (reply == JOptionPane.YES_OPTION) { 
+                EliminarPelicula();
+            } 
+            else { 
+                System.out.println("No se elimino :)");
+            }            
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un registro");
+        }
+        mostrarPelicula = false;
+        cargar();
+    }//GEN-LAST:event_LabelEliminarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

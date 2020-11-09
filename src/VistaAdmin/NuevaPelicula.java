@@ -15,7 +15,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
 
 /*
  * @author Davis
@@ -91,25 +90,47 @@ public class NuevaPelicula extends javax.swing.JFrame {
         }
     }
     
-//    void ingresar(){
-//        String sql="INSERT INTO Pelicula (nombre,apellidoP,apellidoM,dni,sexo,estadoCliente) VALUES (?,?,?,?,?,?)";
-//        try {
-//            PreparedStatement pst  = cn.prepareStatement(sql);
-//            pst.setString(1, txtNombres.getText());
-//            pst.setString(2, txtApellidoP.getText());
-//            pst.setString(3, txtApellidoM.getText());
-//            pst.setString(4, txtDni.getText());
-//            pst.setString(5, cboSexo.getSelectedItem().toString());
-//            pst.setInt(6, 1);   
-//
-//            int n=pst.executeUpdate();
-//            if(n>0){
-//                JOptionPane.showMessageDialog(null, "Registro Guardado con Exito");
-//            }
-//        } catch (SQLException ex) {
-//            System.out.println("Error al ingresar datos del Cliente: " + ex);
-//        }
-//    }
+    void ingresar(){
+        String sql="INSERT INTO Pelicula (nombreP,costoP,estadoP,cantidadP,fotoP,idCategoria) VALUES (?,?,?,?,?,?)";
+        try {
+            PreparedStatement pst  = cn.prepareStatement(sql);
+            pst.setString(1, txtNombrePe.getText());
+            pst.setDouble(2, Double.parseDouble(txtCostoPe.getText()));
+            pst.setInt(3, 1);
+            pst.setInt(4, Integer.parseInt(txtCantidadPe.getText()));
+            pst.setBinaryStream(5, getdato());
+            pst.setInt(6, cboCategoria.getSelectedIndex());   
+
+            int n=pst.executeUpdate();
+            if(n>0){
+                JOptionPane.showMessageDialog(null, "Registro Guardado con Exito");
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error al ingresar datos de la pelicula: " + ex);
+        }
+    }
+    
+    void modificar() {
+        try {
+            String nombre = txtNombrePe.getText();
+            double costo = Double.parseDouble(txtCostoPe.getText());
+            int cantidad = Integer.parseInt(txtCantidadPe.getText());
+            int categoria = cboCategoria.getSelectedIndex();
+
+            String insertar = "UPDATE Pelicula SET "
+            +"nombreP='"+nombre+"', "
+            +"costoP="+costo+", "
+            +"cantidadP="+cantidad+", "
+            +"idCategoria="+categoria+""
+            +"WHERE idPelicula='"+PanelPelicula.idPeli+"'";
+            PreparedStatement pst = cn.prepareStatement(insertar);
+
+            pst.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("error al modificar los datos del Cliente: "+e);
+        }    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -294,10 +315,10 @@ public class NuevaPelicula extends javax.swing.JFrame {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
         if(PanelPelicula.mostrarPelicula==true){
-            //modificar();
+            modificar();
         }
         else{
-            //ingresar();
+            ingresar();
         } 
         LimpiarCampos();
         PanelPelicula.mostrarPelicula = false;

@@ -18,6 +18,7 @@ import java.sql.Statement;
 public class EliminarTarjeta extends javax.swing.JFrame {
 
     public static double saldoAnterior = 0;
+    public static int estadoAnterior = 1;
     
     public EliminarTarjeta() {
         initComponents();
@@ -63,8 +64,9 @@ public class EliminarTarjeta extends javax.swing.JFrame {
 
             if(rs.next()){
                 saldoAnterior = rs.getDouble("saldoTarjeta");
+                estadoAnterior = rs.getInt("estadoTarjeta");
             }  
-            System.out.println(saldoAnterior);
+            System.out.println(saldoAnterior + " " + estadoAnterior);
 
         } catch (Exception e) {
             System.out.println("ERROR seleccionar datos de la tarjeta (saldo): "+e.getMessage());
@@ -146,9 +148,9 @@ public class EliminarTarjeta extends javax.swing.JFrame {
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
+        ObtenerSaldoAnterior();
         ModificarCliente();
         ModificarTarjeta();
-        ObtenerSaldoAnterior();
         this.dispose();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 

@@ -76,13 +76,15 @@ public class GestionTarjeta extends javax.swing.JFrame {
             pst.setString(2, (anio+2)+"-"+mes+"-"+dia);
             pst.setString(3, txtContrasenia.getText());
             pst.setDouble(4, Double.parseDouble(txtSaldoTarjeta.getText()));
-            pst.setInt(5, 1);
+            pst.setInt(5, EliminarTarjeta.estadoAnterior);
             pst.setString(6, "Nueva Tarjeta");
 
             int n=pst.executeUpdate();
             if(n>0){
                 JOptionPane.showMessageDialog(null, "Registro Guardado con Exito");
             }
+            
+            EliminarTarjeta.estadoAnterior=1;
         } catch (SQLException ex) {
             System.out.println("Error al ingresar datos de la Tarjeta: " + ex);
         }

@@ -268,7 +268,14 @@ public class PantallaPrincipal extends javax.swing.JFrame {
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
         // TODO add your handling code here:
+        PanelReportes PR = new PanelReportes();
+        PR.setSize(711, 631);
+        PR.setLocation(0, 0);
         
+        PanelModulo.removeAll();
+        PanelModulo.add(PR, BorderLayout.CENTER);
+        PanelModulo.revalidate();
+        PanelModulo.repaint();
     }//GEN-LAST:event_btnReportesActionPerformed
 
     /**

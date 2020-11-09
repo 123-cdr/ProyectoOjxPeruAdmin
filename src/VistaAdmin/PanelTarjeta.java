@@ -28,7 +28,7 @@ public class PanelTarjeta extends javax.swing.JPanel {
     }
 
     void cargar(String valor){     
-        String mostrar="SELECT * FROM Cliente c INNER JOIN Tarjeta t ON c.idTarjeta=t.idTarjeta WHERE (c.dni LIKE '%"+valor+"%' OR c.nombre LIKE '%"+valor+"%') AND t.estadoTarjeta="+1;
+        String mostrar="SELECT * FROM Cliente c INNER JOIN Tarjeta t ON c.idTarjeta=t.idTarjeta WHERE (c.dni LIKE '%"+valor+"%' OR c.nombre LIKE '%"+valor+"%') AND t.estadoTarjeta!="+2;
         String []titulos={"Cliente","DNI","Cód Tarjeta","Saldo","Fec Vencimiento"};
         String []Registros=new String[5];
         model= new DefaultTableModel(null, titulos);

@@ -89,7 +89,7 @@ public class GestionTarjeta extends javax.swing.JFrame {
     }
     
     void BuscarRepetidoCliente(){
-        String mostrar="SELECT * FROM Cliente WHERE idCliente="+idCliente+" AND idTarjeta>"+0;
+        String mostrar="SELECT * FROM Cliente WHERE idCliente="+idCliente+" AND idTarjeta!="+0;
 
         try {
               Statement st = cn.createStatement();
